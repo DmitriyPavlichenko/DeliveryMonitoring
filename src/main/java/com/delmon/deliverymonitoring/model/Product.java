@@ -9,7 +9,6 @@ import java.io.Serializable;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 public class Product implements Serializable {
     @Setter(AccessLevel.NONE)

@@ -8,7 +8,6 @@ import javax.persistence.*;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 @Entity
 public class Department {
     @Setter(AccessLevel.NONE)
