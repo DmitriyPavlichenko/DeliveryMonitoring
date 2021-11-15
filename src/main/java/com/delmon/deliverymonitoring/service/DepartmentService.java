@@ -12,12 +12,14 @@ import java.util.List;
 @Service
 public class DepartmentService {
     private final DepartmentRepository repository;
-    // TODO: exception's messages move to constant fields
+
+    private final static String ADDRESS_IS_EXISTING_MESSAGE = "Department with %s address is already existing";
+    private final static String ADDRESS_IS_NOT_EXISTING_MESSAGE = "Department with %s address address isn't existing";
 
     public void saveNewDepartment(Department department) {
         // Checking if given department address is unique
         if (repository.existsByAddress(department.getAddress())) {
-            throw new IllegalAddressException("Department with " + department.getAddress() + " address is already existing");
+            throw new IllegalAddressException(String.format(ADDRESS_IS_EXISTING_MESSAGE, department.getAddress()));
         }
 
         // TODO: address validation
@@ -27,7 +29,7 @@ public class DepartmentService {
 
     public Department findDepartmentByAddress(String address) {
         return repository.findByAddress(address)
-                .orElseThrow(() -> new IllegalAddressException("Department with " + address + " address isn't existing"));
+                .orElseThrow(() -> new IllegalAddressException(String.format(ADDRESS_IS_NOT_EXISTING_MESSAGE, address)));
     }
 
     public List<Department> findAllDepartments() {
@@ -37,7 +39,7 @@ public class DepartmentService {
     public void deleteDepartmentByAddress(String address) {
         // Checking if given address is existing
         if (!repository.existsByAddress(address)) {
-            throw new IllegalAddressException("Department with " + address + " address isn't existing");
+            throw new IllegalAddressException(String.format(ADDRESS_IS_NOT_EXISTING_MESSAGE, address));
         }
 
         repository.deleteByAddress(address);

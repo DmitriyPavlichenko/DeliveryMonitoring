@@ -12,12 +12,14 @@ import java.util.List;
 @Service
 public class WarehouseWorkerService {
     private final WarehouseWorkerRepository repository;
-    // TODO: exception's messages move to constant fields
+
+    private final static String NUMBER_IS_EXISTING_MESSAGE = "Worker with %s phone number is already existing";
+    private final static String NUMBER_IS_NOT_EXISTING_MESSAGE = "Worker with %s phone number isn't existing";
 
     public void saveNewWarehouseWorker(WarehouseWorker worker) {
         // Checking if given worker's phone number is unique
         if (repository.existsByPhoneNumber(worker.getPhoneNumber())) {
-            throw new IllegalPhoneNumberException("Warehouse worker with " + worker.getPhoneNumber() + " is already existing");
+            throw new IllegalPhoneNumberException(String.format(NUMBER_IS_EXISTING_MESSAGE, worker.getPhoneNumber()));
         }
 
         // TODO: phone number validation
@@ -27,7 +29,7 @@ public class WarehouseWorkerService {
 
     public WarehouseWorker findWarehouseWorkerByPhoneNumber(String phoneNumber) {
         return repository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new IllegalPhoneNumberException("Warehouse worker with " + phoneNumber + " isn't existing"));
+                .orElseThrow(() -> new IllegalPhoneNumberException(String.format(NUMBER_IS_NOT_EXISTING_MESSAGE, phoneNumber)));
     }
 
     public List<WarehouseWorker> findAllWarehouseWorkers() {
@@ -37,7 +39,7 @@ public class WarehouseWorkerService {
     public void deleteWarehouseWorkerByPhoneNumber(String phoneNumber) {
         // Checking if given phone number is existing
         if (!repository.existsByPhoneNumber(phoneNumber)) {
-            throw new IllegalPhoneNumberException("Warehouse worker with " + phoneNumber + " is already existing");
+            throw new IllegalPhoneNumberException(String.format(NUMBER_IS_NOT_EXISTING_MESSAGE, phoneNumber));
         }
 
         repository.deleteByPhoneNumber(phoneNumber);

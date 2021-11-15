@@ -13,10 +13,13 @@ import java.util.UUID;
 public class OrderingService {
     private final OrderingRepository repository;
 
+    private final static String UUID_IS_EXISTING_MESSAGE = "Ordering with %s uuid is already existing";
+    private final static String UUID_IS_NOT_EXISTING_MESSAGE = "Ordering with %s uuid isn't existing";
+
     public String saveNewOrdering(Ordering ordering) {
         // Checking if ordering uuid is unique
         if (repository.existsByUuid(ordering.getUuid())) {
-            throw new IllegalArgumentException("Ordering with " + ordering.getUuid() + " is already existing");
+            throw new IllegalArgumentException(String.format(UUID_IS_EXISTING_MESSAGE, ordering.getUuid()));
         }
 
         String uuid = UUID.randomUUID().toString();
@@ -28,7 +31,7 @@ public class OrderingService {
 
     public Ordering findOrderingByUuid(String uuid) {
         return repository.findByUuid(uuid)
-                .orElseThrow(() -> new IllegalArgumentException("Ordering with " + uuid + " isn't existing"));
+                .orElseThrow(() -> new IllegalArgumentException(String.format(UUID_IS_NOT_EXISTING_MESSAGE, uuid)));
     }
 
     public List<Ordering> findAllOrdering() {
@@ -38,7 +41,7 @@ public class OrderingService {
     public void deleteOrderingByUuid(String uuid) {
         // Checking if ordering uuid is existing
         if (!repository.existsByUuid(uuid)) {
-            throw new IllegalArgumentException("Ordering with " + uuid + " isn't existing");
+            throw new IllegalArgumentException(String.format(UUID_IS_NOT_EXISTING_MESSAGE, uuid));
         }
 
         repository.deleteByUuid(uuid);
