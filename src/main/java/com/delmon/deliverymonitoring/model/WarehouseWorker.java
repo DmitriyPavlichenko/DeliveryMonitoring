@@ -11,7 +11,6 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 public class WarehouseWorker implements Serializable {
-    @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,5 +18,12 @@ public class WarehouseWorker implements Serializable {
     private long id;
     private String firstName;
     private String lastName;
+    @Column(nullable = false)
     private String phoneNumber;
+
+    public WarehouseWorker(String firstName, String lastName, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
 }

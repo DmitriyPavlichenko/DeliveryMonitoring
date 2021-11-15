@@ -11,13 +11,21 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 public class Product implements Serializable {
-    @Setter(AccessLevel.NONE)
     @Getter(AccessLevel.NONE)
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     private long id;
+    @Column(nullable = false)
     private String name;
+    @Column(nullable = false)
     private float price;
+    @Column(nullable = false)
     private int quantity;
+
+    public Product(String name, float price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 }
