@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Setter
@@ -30,9 +30,9 @@ public class Ordering implements Serializable {
     @OneToOne(optional = false)
     private Department department;
     @Column(nullable = false)
-    private Date date;
+    private LocalDateTime date;
 
-    public Ordering(List<Product> products, WarehouseWorker worker, Department department, Date date) {
+    public Ordering(List<Product> products, WarehouseWorker worker, Department department, LocalDateTime date) {
         this.products = products;
         this.worker = worker;
         this.department = department;

@@ -13,14 +13,17 @@ import java.util.UUID;
 public class OrderingService {
     private final OrderingRepository repository;
 
-    public void saveNewOrdering(Ordering ordering) {
+    public String saveNewOrdering(Ordering ordering) {
         // Checking if ordering uuid is unique
         if (repository.existsByUuid(ordering.getUuid())) {
             throw new IllegalArgumentException("Ordering with " + ordering.getUuid() + " is already existing");
         }
 
-        ordering.setUuid(UUID.randomUUID().toString());
+        String uuid = UUID.randomUUID().toString();
+        ordering.setUuid(uuid);
         repository.save(ordering);
+
+        return uuid;
     }
 
     public Ordering findOrderingByUuid(String uuid) {

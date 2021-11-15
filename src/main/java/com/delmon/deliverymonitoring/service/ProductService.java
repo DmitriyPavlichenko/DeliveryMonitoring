@@ -36,5 +36,7 @@ public class ProductService {
         if (!repository.existsByName(name)) {
             throw new IllegalArgumentException("Product with " + name + " isn't existing");
         }
+
+        repository.deleteByName(name);
     }
 }
