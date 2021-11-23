@@ -1,6 +1,5 @@
 package com.delmon.deliverymonitoring.service;
 
-import com.delmon.deliverymonitoring.exception.IllegalPhoneNumberException;
 import com.delmon.deliverymonitoring.model.WarehouseWorker;
 import com.delmon.deliverymonitoring.repository.WarehouseWorkerRepository;
 import lombok.AllArgsConstructor;
@@ -19,7 +18,7 @@ public class WarehouseWorkerService {
     public void saveNewWarehouseWorker(WarehouseWorker worker) {
         // Checking if given worker's phone number is unique
         if (repository.existsByPhoneNumber(worker.getPhoneNumber())) {
-            throw new IllegalPhoneNumberException(String.format(NUMBER_IS_EXISTING_MESSAGE, worker.getPhoneNumber()));
+            throw new IllegalStateException(String.format(NUMBER_IS_EXISTING_MESSAGE, worker.getPhoneNumber()));
         }
 
         // TODO: phone number validation
@@ -29,7 +28,7 @@ public class WarehouseWorkerService {
 
     public WarehouseWorker findWarehouseWorkerByPhoneNumber(String phoneNumber) {
         return repository.findByPhoneNumber(phoneNumber)
-                .orElseThrow(() -> new IllegalPhoneNumberException(String.format(NUMBER_IS_NOT_EXISTING_MESSAGE, phoneNumber)));
+                .orElseThrow(() -> new IllegalStateException(String.format(NUMBER_IS_NOT_EXISTING_MESSAGE, phoneNumber)));
     }
 
     public List<WarehouseWorker> findAllWarehouseWorkers() {
@@ -39,7 +38,7 @@ public class WarehouseWorkerService {
     public void deleteWarehouseWorkerByPhoneNumber(String phoneNumber) {
         // Checking if given phone number is existing
         if (!repository.existsByPhoneNumber(phoneNumber)) {
-            throw new IllegalPhoneNumberException(String.format(NUMBER_IS_NOT_EXISTING_MESSAGE, phoneNumber));
+            throw new IllegalStateException(String.format(NUMBER_IS_NOT_EXISTING_MESSAGE, phoneNumber));
         }
 
         repository.deleteByPhoneNumber(phoneNumber);
