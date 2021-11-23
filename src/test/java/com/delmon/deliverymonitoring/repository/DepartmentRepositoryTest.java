@@ -35,7 +35,7 @@ class DepartmentRepositoryTest {
         boolean exists = repository.existsByAddress(address);
 
         // then
-        assertThat(exists).isTrue();
+        assertThat(exists).isFalse();
     }
 
     @Test
