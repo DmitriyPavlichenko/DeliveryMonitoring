@@ -1,6 +1,6 @@
-package com.delmon.deliverymonitoring.repository;
+package com.delmon.deliverymonitoring.product;
 
-import com.delmon.deliverymonitoring.model.Product;
+import com.delmon.deliverymonitoring.product.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

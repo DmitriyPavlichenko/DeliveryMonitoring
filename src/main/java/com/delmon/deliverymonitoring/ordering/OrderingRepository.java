@@ -1,6 +1,5 @@
-package com.delmon.deliverymonitoring.repository;
+package com.delmon.deliverymonitoring.ordering;
 
-import com.delmon.deliverymonitoring.model.Ordering;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

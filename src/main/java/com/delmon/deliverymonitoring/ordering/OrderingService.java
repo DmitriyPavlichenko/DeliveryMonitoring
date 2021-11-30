@@ -1,7 +1,5 @@
-package com.delmon.deliverymonitoring.service;
+package com.delmon.deliverymonitoring.ordering;
 
-import com.delmon.deliverymonitoring.model.Ordering;
-import com.delmon.deliverymonitoring.repository.OrderingRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

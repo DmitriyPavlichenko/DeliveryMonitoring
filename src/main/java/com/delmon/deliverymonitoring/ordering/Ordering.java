@@ -1,5 +1,8 @@
-package com.delmon.deliverymonitoring.model;
+package com.delmon.deliverymonitoring.ordering;
 
+import com.delmon.deliverymonitoring.department.Department;
+import com.delmon.deliverymonitoring.product.Product;
+import com.delmon.deliverymonitoring.temporary.WarehouseWorker;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

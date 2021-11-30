@@ -1,4 +1,4 @@
-package com.delmon.deliverymonitoring.model;
+package com.delmon.deliverymonitoring.department;
 
 import lombok.*;
 
