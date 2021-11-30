@@ -1,4 +1,4 @@
-package com.delmon.deliverymonitoring.repository;
+package com.delmon.deliverymonitoring.employee;
 
 import com.delmon.deliverymonitoring.employee.Employee;
 import com.delmon.deliverymonitoring.employee.EmployeeRepository;

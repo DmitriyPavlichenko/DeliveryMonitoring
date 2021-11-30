@@ -26,6 +26,6 @@ public class EmployeeService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return employeeRepository.findEmployeeByPhoneNumber(s)
-                .orElseThrow(() -> new UsernameNotFoundException("User with " + s + " email isn't exists"));
+                .orElseThrow(() -> new UsernameNotFoundException("Employee with " + s + " phone number doesn't exist"));
     }
 }

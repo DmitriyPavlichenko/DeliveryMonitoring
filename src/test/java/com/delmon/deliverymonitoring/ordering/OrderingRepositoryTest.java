@@ -1,4 +1,4 @@
-package com.delmon.deliverymonitoring.repository;
+package com.delmon.deliverymonitoring.ordering;
 
 import com.delmon.deliverymonitoring.department.Department;
 import com.delmon.deliverymonitoring.department.DepartmentRepository;
