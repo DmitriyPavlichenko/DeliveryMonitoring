@@ -13,9 +13,9 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 
-@NoArgsConstructor
 @Setter
 @Getter
+@NoArgsConstructor
 @Entity
 public class Employee implements UserDetails {
     @Getter(AccessLevel.NONE)
@@ -27,7 +27,7 @@ public class Employee implements UserDetails {
     private String lastName;
     @Enumerated
     private Role role;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String phoneNumber;
     private String password;
     private boolean locked = false;

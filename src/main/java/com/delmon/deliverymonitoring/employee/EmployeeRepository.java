@@ -10,8 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
-    Optional<Employee> findAppUserByPhoneNumber(String phoneNumber);
-    boolean existByPhoneNumber(String phoneNumber);
+    Optional<Employee> findEmployeeByPhoneNumber(String phoneNumber);
+    boolean existsByPhoneNumber(String phoneNumber);
 
     @Modifying(clearAutomatically = true)
     @Transactional

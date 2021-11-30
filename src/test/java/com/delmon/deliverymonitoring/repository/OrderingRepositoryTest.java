@@ -1,9 +1,14 @@
 package com.delmon.deliverymonitoring.repository;
 
-import com.delmon.deliverymonitoring.model.Department;
-import com.delmon.deliverymonitoring.model.Ordering;
-import com.delmon.deliverymonitoring.model.Product;
-import com.delmon.deliverymonitoring.model.WarehouseWorker;
+import com.delmon.deliverymonitoring.department.Department;
+import com.delmon.deliverymonitoring.department.DepartmentRepository;
+import com.delmon.deliverymonitoring.employee.Employee;
+import com.delmon.deliverymonitoring.employee.EmployeeRepository;
+import com.delmon.deliverymonitoring.employee.Role;
+import com.delmon.deliverymonitoring.ordering.Ordering;
+import com.delmon.deliverymonitoring.product.Product;
+import com.delmon.deliverymonitoring.ordering.OrderingRepository;
+import com.delmon.deliverymonitoring.product.ProductRepository;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,7 +27,7 @@ class OrderingRepositoryTest {
     @Autowired
     private ProductRepository productRepository;
     @Autowired
-    private WarehouseWorkerRepository warehouseWorkerRepository;
+    private EmployeeRepository employeeRepository;
     @Autowired
     private DepartmentRepository departmentRepository;
 
@@ -33,11 +38,11 @@ class OrderingRepositoryTest {
     void setUp() {
         Product givenProduct = new Product("name", 3.5f, 5);
         productRepository.save(givenProduct);
-        WarehouseWorker givenWarehouseWorker = new WarehouseWorker("firstName", "lastName", "number");
-        warehouseWorkerRepository.save(givenWarehouseWorker);
+        Employee givenEmployee = new Employee("firstName", "lastName", Role.ADMIN, "number", "pass");
+        employeeRepository.save(givenEmployee);
         Department givenDepartment = new Department("address");
         departmentRepository.save(givenDepartment);
-        ordering = new Ordering(Lists.newArrayList(givenProduct), givenWarehouseWorker, givenDepartment, LocalDateTime.now());
+        ordering = new Ordering(Lists.newArrayList(givenProduct), givenEmployee, givenDepartment, LocalDateTime.now());
         ordering.setUuid(uuid);
     }
 

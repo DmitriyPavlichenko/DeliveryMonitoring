@@ -1,8 +1,8 @@
 package com.delmon.deliverymonitoring.ordering;
 
 import com.delmon.deliverymonitoring.department.Department;
+import com.delmon.deliverymonitoring.employee.Employee;
 import com.delmon.deliverymonitoring.product.Product;
-import com.delmon.deliverymonitoring.temporary.WarehouseWorker;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,15 +29,15 @@ public class Ordering implements Serializable {
     @OneToMany
     private List<Product> products;
     @OneToOne(optional = false)
-    private WarehouseWorker worker;
+    private Employee employee;
     @OneToOne(optional = false)
     private Department department;
     @Column(nullable = false)
     private LocalDateTime date;
 
-    public Ordering(List<Product> products, WarehouseWorker worker, Department department, LocalDateTime date) {
+    public Ordering(List<Product> products, Employee employee, Department department, LocalDateTime date) {
         this.products = products;
-        this.worker = worker;
+        this.employee = employee;
         this.department = department;
         this.date = date;
     }

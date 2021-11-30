@@ -1,6 +1,7 @@
 package com.delmon.deliverymonitoring.repository;
 
-import com.delmon.deliverymonitoring.model.Product;
+import com.delmon.deliverymonitoring.product.Product;
+import com.delmon.deliverymonitoring.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
