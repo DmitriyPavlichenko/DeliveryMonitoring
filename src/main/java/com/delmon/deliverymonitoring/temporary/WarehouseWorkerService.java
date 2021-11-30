@@ -1,7 +1,5 @@
-package com.delmon.deliverymonitoring.service;
+package com.delmon.deliverymonitoring.temporary;
 
-import com.delmon.deliverymonitoring.model.WarehouseWorker;
-import com.delmon.deliverymonitoring.repository.WarehouseWorkerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

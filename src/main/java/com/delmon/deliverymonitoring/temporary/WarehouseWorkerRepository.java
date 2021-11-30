@@ -1,6 +1,5 @@
-package com.delmon.deliverymonitoring.repository;
+package com.delmon.deliverymonitoring.temporary;
 
-import com.delmon.deliverymonitoring.model.WarehouseWorker;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
