@@ -18,16 +18,23 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 public class Employee implements UserDetails {
-    @Getter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "employee_sequence",
+            sequenceName = "employee_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "employee_sequence"
+    )
     @Column(nullable = false, updatable = false)
     private long id;
     private String firstName;
     private String lastName;
     @Enumerated
     private Role role;
-//    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String phoneNumber;
     private String password;
     private boolean locked = false;

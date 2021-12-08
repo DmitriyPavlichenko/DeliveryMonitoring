@@ -1,3 +1,4 @@
+/*
 package com.delmon.deliverymonitoring.ordering;
 
 import com.delmon.deliverymonitoring.department.Department;
@@ -120,4 +121,4 @@ class OrderingRepositoryTest {
             repository.deleteByUuid(uuid);
         } catch (Exception ignored) { }
     }
-}
+}*/

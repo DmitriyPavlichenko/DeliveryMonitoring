@@ -1,26 +1,24 @@
-package com.delmon.deliverymonitoring.ordering;
+package com.delmon.deliverymonitoring.employee;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/v1/warehouse/ordering")
-public class OrderingController {
-    private OrderingService service;
+@RequestMapping("api/v1/supply/employee")
+public class EmployeeController {
+    private EmployeeService service;
 
     @PostMapping
-    public void saveOrder(@RequestBody OrderingRequest orderingRequest) {
-        service.saveNewOrdering(orderingRequest);
+    public void saveEmployee(@RequestBody Employee employee) {
+        service.singUpEmployee(employee);
     }
 
     @GetMapping(path = "find")
-    public Ordering findOrder(@RequestParam String uuid) {
-        return service.findOrderingByUuid(uuid);
+    public Employee findEmployee(@RequestParam String phoneNumber) {
+        return (Employee) service.loadUserByUsername(phoneNumber);
     }
-
+/*
     @GetMapping(path = "findall")
     public List<Ordering> findAllOrders() {
         return service.findAllOrdering();
@@ -29,5 +27,5 @@ public class OrderingController {
     @DeleteMapping
     public void deleteOrdering(@RequestParam String uuid) {
         service.deleteOrderingByUuid(uuid);
-    }
+    }*/
 }

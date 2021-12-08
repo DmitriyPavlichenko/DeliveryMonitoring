@@ -20,22 +20,35 @@ import java.util.List;
 public class Ordering implements Serializable {
     @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "ordering_sequence",
+            sequenceName = "ordering_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "ordering_sequence"
+    )
     @Column(nullable = false, updatable = false)
     private long id;
     @Column(nullable = false)
     private String uuid;
-    @Column(nullable = false)
-    @OneToMany
+
+    @OneToMany(targetEntity = Product.class, orphanRemoval=true)
+    @JoinColumn(referencedColumnName = "id")
     private List<Product> products;
-    @OneToOne(optional = false)
+    @OneToOne(targetEntity = Employee.class)
+    @JoinColumn(referencedColumnName = "id", nullable = false)
     private Employee employee;
-    @OneToOne(optional = false)
+    @OneToOne(targetEntity = Department.class)
+    @JoinColumn(referencedColumnName = "id", nullable = false)
     private Department department;
+
     @Column(nullable = false)
     private LocalDateTime date;
 
-    public Ordering(List<Product> products, Employee employee, Department department, LocalDateTime date) {
+    public Ordering(String uuid, List<Product> products, Employee employee, Department department, LocalDateTime date) {
+        this.uuid = uuid;
         this.products = products;
         this.employee = employee;
         this.department = department;

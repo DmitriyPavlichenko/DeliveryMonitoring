@@ -1,3 +1,4 @@
+/*
 package com.delmon.deliverymonitoring.ordering;
 
 import com.delmon.deliverymonitoring.department.Department;
@@ -82,4 +83,4 @@ class OrderingServiceTest {
         // then
         verify(mockedRepository).deleteByUuid(uuid);
     }
-}
+}*/

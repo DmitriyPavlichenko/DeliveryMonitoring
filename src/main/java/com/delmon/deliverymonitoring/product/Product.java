@@ -1,5 +1,6 @@
 package com.delmon.deliverymonitoring.product;
 
+import com.delmon.deliverymonitoring.ordering.Ordering;
 import lombok.*;
 
 import javax.persistence.*;
@@ -11,12 +12,19 @@ import java.io.Serializable;
 @NoArgsConstructor
 @Entity
 public class Product implements Serializable {
-    @Getter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "product_sequence",
+            sequenceName = "product_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "product_sequence"
+    )
     @Column(nullable = false, updatable = false)
     private long id;
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
     @Column(nullable = false)
     private float price;
