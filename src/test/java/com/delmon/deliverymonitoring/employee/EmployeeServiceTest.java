@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -26,18 +24,18 @@ class EmployeeServiceTest {
     @Test
     void singUpEmployee() {
         // given
-        Employee givenEmployee = new Employee("firstName", "lastName", Role.ADMIN,
-                "number", "pass");
+        Employee givenEmployee = new Employee("firstName", "lastName", EmployeeRole.WAREHOUSE_WORKER,
+                "number");
         given(mockedRepository.existsByPhoneNumber(any())).willReturn(false);
 
         // when
-        service.singUpEmployee(givenEmployee);
+        service.saveNewEmployee(givenEmployee);
 
         // then
         verify(mockedRepository).save(givenEmployee);
     }
 
-    @Test
+    /*@Test
     void existEmployeeByPhoneNumber() {
         // given
         String phoneNumber = "number";
@@ -47,14 +45,14 @@ class EmployeeServiceTest {
 
         // then
         verify(mockedRepository).existsByPhoneNumber(phoneNumber);
-    }
+    }*/
 
-    @Test
+    /*@Test
     void loadUserByUsername() {
         // given
         String phoneNumber = "number";
         Employee givenEmployee = new Employee("firstName", "lastName", Role.ADMIN,
-                "number", "pass");
+                "number");
         given(mockedRepository.findEmployeeByPhoneNumber(any())).willReturn(java.util.Optional.of(givenEmployee));
 
         // when
@@ -62,5 +60,5 @@ class EmployeeServiceTest {
 
         // then
         verify(mockedRepository).findEmployeeByPhoneNumber(phoneNumber);
-    }
+    }*/
 }

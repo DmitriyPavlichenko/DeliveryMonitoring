@@ -1,17 +1,16 @@
 package com.delmon.deliverymonitoring.employee;
 
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @AllArgsConstructor
 @Service
-public class EmployeeService implements UserDetailsService {
+public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
-    public void singUpEmployee(Employee employee) {
+    public void saveNewEmployee(Employee employee) {
         if (employeeRepository.existsByPhoneNumber(employee.getPhoneNumber())) {
             throw new IllegalStateException(employee.getPhoneNumber() + " is already registered");
         }
@@ -19,13 +18,16 @@ public class EmployeeService implements UserDetailsService {
         employeeRepository.save(employee);
     }
 
-    public boolean existEmployeeByPhoneNumber(String phoneNumber) {
-        return employeeRepository.existsByPhoneNumber(phoneNumber);
+    public Employee findEmployee(String phoneNumber) {
+        return employeeRepository.findEmployeeByPhoneNumber(phoneNumber)
+                .orElseThrow(() -> new IllegalStateException("Invalid phone number"));
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        return employeeRepository.findEmployeeByPhoneNumber(s)
-                .orElseThrow(() -> new UsernameNotFoundException("Employee with " + s + " phone number doesn't exist"));
+    public List<Employee> findAllEmployees() {
+        return employeeRepository.findAll();
+    }
+
+    public void deleteEmployeeByPhoneNumber(String phoneNumber) {
+        employeeRepository.deleteByPhoneNumber(phoneNumber);
     }
 }
