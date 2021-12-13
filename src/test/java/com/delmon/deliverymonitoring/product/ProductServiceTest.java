@@ -6,7 +6,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -25,7 +24,7 @@ class ProductServiceTest {
     @Test
     void saveNewProduct() {
         // given
-        Product givenProduct = new Product("name", 3.5f, 5);
+        Product givenProduct = new Product("name", 5);
         given(mockedRepository.existsByName(anyString())).willReturn(false);
 
         // when
@@ -39,7 +38,7 @@ class ProductServiceTest {
     void findProductByName() {
         // given
         String name = "name";
-        Product givenProduct = new Product("name", 3.5f, 5);
+        Product givenProduct = new Product("name", 5);
         given(mockedRepository.findByName(anyString())).willReturn(java.util.Optional.of(givenProduct));
 
         // when

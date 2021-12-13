@@ -34,7 +34,7 @@ public class Ordering implements Serializable {
     @Column(nullable = false)
     private String uuid;
 
-    @OneToMany(targetEntity = Product.class, orphanRemoval=true)
+    @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "id")
     private List<Product> products;
     @OneToOne(targetEntity = Employee.class)

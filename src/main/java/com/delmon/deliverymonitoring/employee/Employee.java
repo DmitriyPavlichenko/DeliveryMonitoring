@@ -1,6 +1,8 @@
 package com.delmon.deliverymonitoring.employee;
 
+import com.delmon.deliverymonitoring.security.ApplicationUserRole;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -27,11 +29,11 @@ public class Employee implements Serializable {
     private String firstName;
     private String lastName;
     @Enumerated
-    private EmployeeRole role;
+    private ApplicationUserRole role;
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
-    public Employee(String firstName, String lastName, EmployeeRole role, String phoneNumber) {
+    public Employee(String firstName, String lastName, ApplicationUserRole role, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.role = role;

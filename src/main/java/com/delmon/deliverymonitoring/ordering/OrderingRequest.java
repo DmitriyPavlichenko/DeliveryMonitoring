@@ -1,5 +1,6 @@
 package com.delmon.deliverymonitoring.ordering;
 
+import com.delmon.deliverymonitoring.product.Product;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,7 +15,8 @@ import java.util.List;
 @EqualsAndHashCode
 public class OrderingRequest {
     private final String uuid;
-    private final List<Long> productIds;
+    private final List<Product> products;
+
     private final Long employeeId;
     private final Long departmentId;
     private final LocalDateTime dateTime;

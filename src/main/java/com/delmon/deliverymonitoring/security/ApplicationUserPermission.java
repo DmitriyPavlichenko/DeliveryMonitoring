@@ -15,7 +15,9 @@ public enum ApplicationUserPermission {
 
     PRODUCT_SAVE("product:save"),
     PRODUCT_FIND("product:find"),
-    PRODUCT_DELETE("product:delete");
+    PRODUCT_DELETE("product:delete"),
+
+    REGISTRATION("registration:register");
 
     private final String permission;
 

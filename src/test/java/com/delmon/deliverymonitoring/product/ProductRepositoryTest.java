@@ -1,7 +1,5 @@
 package com.delmon.deliverymonitoring.product;
 
-import com.delmon.deliverymonitoring.product.Product;
-import com.delmon.deliverymonitoring.product.ProductRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,7 +15,7 @@ class ProductRepositoryTest {
     void existsByName() {
         // given
         String name = "name";
-        repository.save(new Product(name, 4.1f, 5));
+        repository.save(new Product(name, 5));
 
         // when
         boolean exists = repository.existsByName(name);
@@ -30,7 +28,7 @@ class ProductRepositoryTest {
     void existsByInvalidName() {
         // given
         String name = "name";
-        repository.save(new Product("notName", 3.5f, 5));
+        repository.save(new Product("notName", 5));
 
         // when
         boolean exists = repository.existsByName(name);
@@ -43,7 +41,7 @@ class ProductRepositoryTest {
     void findByName() {
         // given
         String name = "name";
-        Product givenProduct = new Product(name, 3.5f, 5);
+        Product givenProduct = new Product(name, 5);
         repository.save(givenProduct);
 
         // when
@@ -58,7 +56,7 @@ class ProductRepositoryTest {
     void findByInvalidName() {
         // given
         String name = "name";
-        Product givenProduct = new Product("invalidName", 3.5f, 5);
+        Product givenProduct = new Product("invalidName", 5);
         repository.save(givenProduct);
 
         // when
@@ -73,7 +71,7 @@ class ProductRepositoryTest {
     void deleteByName() {
         // given
         String name = "name";
-        Product givenProduct = new Product("invalidName", 3.5f, 5);
+        Product givenProduct = new Product("invalidName", 5);
         repository.save(givenProduct);
 
         // when
@@ -88,7 +86,7 @@ class ProductRepositoryTest {
     void deleteByInvalidName() {
         // given
         String name = "name";
-        Product givenProduct = new Product("invalidName", 3.5f, 5);
+        Product givenProduct = new Product("invalidName", 5);
         repository.save(givenProduct);
 
         // when

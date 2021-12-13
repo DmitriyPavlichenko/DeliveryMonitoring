@@ -1,63 +1,49 @@
 package com.delmon.deliverymonitoring.security;
 
+import com.delmon.deliverymonitoring.security.user.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import static com.delmon.deliverymonitoring.security.ApplicationUserRole.*;
-
+@AllArgsConstructor
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
-    private final PasswordEncoder passwordEncoder;
-
-    public WebSecurityConfiguration(PasswordEncoder passwordEncoder) {
-        this.passwordEncoder = passwordEncoder;
-    }
+    private final BCryptPasswordEncoder passwordEncoder;
+    private final UserService userService;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "index", "css/*", "js/*").permitAll()
+                    .antMatchers("/", "/api/v*/registration/**", "index", "css/*", "js/*")
+                    .permitAll()
                 .anyRequest()
-                .authenticated()
+                    .authenticated()
                 .and()
                 .httpBasic();
     }
 
-    @Bean
     @Override
-    protected UserDetailsService userDetailsService() {
-        UserDetails testAdmin = User.builder()
-                .username("manager")
-                .password(passwordEncoder.encode("pass"))
-                .authorities(MANAGER.getGrantedAuthorities())
-                .build();
+    protected void configure(AuthenticationManagerBuilder auth) {
+        auth.authenticationProvider(daoAuthenticationProvider());
+    }
 
-        UserDetails testSupplier = User.builder()
-                .username("supplier")
-                .password(passwordEncoder.encode("pass"))
-                .authorities(PRODUCT_SUPPLIER.getGrantedAuthorities())
-                .build();
-
-        UserDetails testWorker = User.builder()
-                .username("worker")
-                .password(passwordEncoder.encode("pass"))
-                .authorities(WAREHOUSE_WORKER.getGrantedAuthorities())
-                .build();
-
-
-        return new InMemoryUserDetailsManager(testAdmin, testSupplier, testWorker);
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider =
+                new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setUserDetailsService(userService);
+        return provider;
     }
 }

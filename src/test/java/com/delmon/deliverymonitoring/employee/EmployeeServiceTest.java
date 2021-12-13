@@ -1,5 +1,6 @@
 package com.delmon.deliverymonitoring.employee;
 
+import com.delmon.deliverymonitoring.security.ApplicationUserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +25,7 @@ class EmployeeServiceTest {
     @Test
     void singUpEmployee() {
         // given
-        Employee givenEmployee = new Employee("firstName", "lastName", EmployeeRole.WAREHOUSE_WORKER,
+        Employee givenEmployee = new Employee("firstName", "lastName", ApplicationUserRole.WAREHOUSE_WORKER,
                 "number");
         given(mockedRepository.existsByPhoneNumber(any())).willReturn(false);
 

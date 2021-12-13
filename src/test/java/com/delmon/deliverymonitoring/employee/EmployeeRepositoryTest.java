@@ -1,5 +1,6 @@
 package com.delmon.deliverymonitoring.employee;
 
+import com.delmon.deliverymonitoring.security.ApplicationUserRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -15,7 +16,7 @@ class EmployeeRepositoryTest {
     void findEmployeeByPhoneNumber() {
         // given
         String phoneNumber = "number";
-        Employee givenEmployee = new Employee("firstName", "lastName", EmployeeRole.PRODUCT_SUPPLIER, phoneNumber);
+        Employee givenEmployee = new Employee("firstName", "lastName", ApplicationUserRole.PRODUCT_SUPPLIER, phoneNumber);
         repository.save(givenEmployee);
 
         // when
@@ -30,7 +31,7 @@ class EmployeeRepositoryTest {
     void findEmployeeByInvalidPhoneNumber() {
         // given
         String phoneNumber = "number";
-        Employee givenEmployee = new Employee("firstName", "lastName", EmployeeRole.PRODUCT_SUPPLIER, phoneNumber);
+        Employee givenEmployee = new Employee("firstName", "lastName", ApplicationUserRole.PRODUCT_SUPPLIER, phoneNumber);
         repository.save(givenEmployee);
 
         // when
@@ -45,7 +46,7 @@ class EmployeeRepositoryTest {
     void existByPhoneNumber() {
         // given
         String phoneNumber = "number";
-        Employee givenEmployee = new Employee("firstName", "lastName", EmployeeRole.WAREHOUSE_WORKER, phoneNumber);
+        Employee givenEmployee = new Employee("firstName", "lastName", ApplicationUserRole.WAREHOUSE_WORKER, phoneNumber);
         repository.save(givenEmployee);
 
         // when
@@ -59,7 +60,7 @@ class EmployeeRepositoryTest {
     void existByInvalidPhoneNumber() {
         // given
         String phoneNumber = "number";
-        Employee givenEmployee = new Employee("firstName", "lastName", EmployeeRole.PRODUCT_SUPPLIER, phoneNumber);
+        Employee givenEmployee = new Employee("firstName", "lastName", ApplicationUserRole.PRODUCT_SUPPLIER, phoneNumber);
         repository.save(givenEmployee);
 
         // when

@@ -13,7 +13,6 @@ import java.util.stream.Collectors;
 @Service
 public class OrderingService {
     private final OrderingRepository repository;
-    private final ProductRepository productRepository;
     private final DepartmentRepository departmentRepository;
     private final EmployeeRepository employeeRepository;
 
@@ -28,10 +27,7 @@ public class OrderingService {
 
         Ordering newOrdering = new Ordering(
                 orderingRequest.getUuid(),
-                productRepository.findAll().stream()
-                        .filter(product -> orderingRequest.getProductIds().stream()
-                                .anyMatch(aLong -> product.getId() == aLong))
-                        .collect(Collectors.toList()),
+                orderingRequest.getProducts(),
                 employeeRepository.getById(orderingRequest.getEmployeeId()),
                 departmentRepository.getById(orderingRequest.getDepartmentId()),
                 orderingRequest.getDateTime());
