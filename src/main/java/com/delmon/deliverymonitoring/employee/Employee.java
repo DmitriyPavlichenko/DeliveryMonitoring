@@ -1,8 +1,10 @@
 package com.delmon.deliverymonitoring.employee;
 
 import com.delmon.deliverymonitoring.security.ApplicationUserRole;
-import lombok.*;
-import lombok.experimental.SuperBuilder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;

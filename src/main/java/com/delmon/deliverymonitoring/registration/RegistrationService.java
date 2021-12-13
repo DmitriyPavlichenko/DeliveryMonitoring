@@ -15,6 +15,7 @@ public class RegistrationService {
     private final PasswordEncoderConfig passwordEncoder;
     private final UserService userService;
 
+
     public void register(RegistrationRequest request) {
         Employee employee = employeeRepository.findById(request.getEmployeeId())
                 .orElseThrow(() -> new IllegalStateException("Employee isn't exist"));

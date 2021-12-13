@@ -21,14 +21,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final UserService userService;
 
     @Override
+
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                    .antMatchers("/", "/api/v*/registration/**", "index", "css/*", "js/*")
-                    .permitAll()
+                .antMatchers("/", "/api/v*/registration/**", "api/v*/supply/employee/**", "index", "css/*", "js/*")
+                .permitAll()
                 .anyRequest()
-                    .authenticated()
+                .authenticated()
                 .and()
                 .httpBasic();
     }

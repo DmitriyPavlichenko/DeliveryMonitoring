@@ -11,7 +11,8 @@ import static com.delmon.deliverymonitoring.security.ApplicationUserPermission.*
 public enum ApplicationUserRole {
     WAREHOUSE_WORKER(Sets.newHashSet(DEPARTMENT_FIND, EMPLOYEE_FIND, ORDER_FIND, ORDER_SAVE, ORDER_DELETE, PRODUCT_FIND)),
     PRODUCT_SUPPLIER(Sets.newHashSet(DEPARTMENT_FIND, EMPLOYEE_FIND, ORDER_FIND, PRODUCT_SAVE, PRODUCT_FIND, PRODUCT_DELETE)),
-    MANAGER(Sets.newHashSet(DEPARTMENT_FIND, DEPARTMENT_SAVE, DEPARTMENT_DELETE, EMPLOYEE_SAVE, EMPLOYEE_FIND, EMPLOYEE_DELETE));
+    MANAGER(Sets.newHashSet(DEPARTMENT_FIND, DEPARTMENT_SAVE, DEPARTMENT_DELETE, EMPLOYEE_SAVE, EMPLOYEE_FIND, EMPLOYEE_DELETE)),
+    ADMINISTRATOR(Sets.newHashSet(ApplicationUserPermission.values()));
 
     private final Set<ApplicationUserPermission> permissions;
 
