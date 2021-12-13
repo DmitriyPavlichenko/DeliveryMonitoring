@@ -11,7 +11,7 @@ logging:
 
 spring:
   datasource:
-    url: jdbc:postgresql://ella.db.elephantsql.com:5432/
+    url: jdbc:postgresql://ella.db.elephantsql.com:5432/lvtjlbwh
     username: lvtjlbwh
     password: zzRV4A2Bj5aa18cMkOMJi4l_xrZooCw_
   jpa:
