@@ -1,18 +1,15 @@
 package com.delmon.deliverymonitoring.security.user;
 
 import com.delmon.deliverymonitoring.employee.Employee;
-import com.delmon.deliverymonitoring.security.ApplicationUserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Objects;
 
 @Setter
@@ -34,23 +31,18 @@ public class ApplicationUser implements UserDetails, Serializable {
     @OneToOne(targetEntity = Employee.class)
     @JoinColumn(referencedColumnName = "id", nullable = false)
     private Employee employee;
-    private String username;
     private String password;
-    @Enumerated
-    private ApplicationUserRole role;
     private boolean locked = false;
     private boolean enabled = true;
 
     public ApplicationUser(Employee employee, String password) {
         this.employee = employee;
-        this.username = employee.getPhoneNumber();
         this.password = password;
-        this.role = employee.getRole();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getGrantedAuthorities();
+        return employee.getRole().getGrantedAuthorities();
     }
 
     @Override
@@ -60,7 +52,7 @@ public class ApplicationUser implements UserDetails, Serializable {
 
     @Override
     public String getUsername() {
-        return username;
+        return employee.getPhoneNumber();
     }
 
     @Override
@@ -89,12 +81,12 @@ public class ApplicationUser implements UserDetails, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ApplicationUser user = (ApplicationUser) o;
-        return locked == user.locked && enabled == user.enabled && Objects.equals(id, user.id) && Objects.equals(employee, user.employee) && role == user.role && Objects.equals(password, user.password);
+        return locked == user.locked && enabled == user.enabled && Objects.equals(id, user.id) && Objects.equals(employee, user.employee)  && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, employee, role, password, locked, enabled);
+        return Objects.hash(id, employee, password, locked, enabled);
     }
 
     @Override
@@ -102,11 +94,9 @@ public class ApplicationUser implements UserDetails, Serializable {
         return "User{" +
                 "id=" + id +
                 ", employee=" + employee +
-                ", role=" + role +
                 ", password='" + password + '\'' +
                 ", locked=" + locked +
                 ", enabled=" + enabled +
                 '}';
     }
-
 }

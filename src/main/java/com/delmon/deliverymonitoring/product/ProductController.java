@@ -12,11 +12,13 @@ import java.util.List;
 public class ProductController {
     private ProductService service;
 
+/*
     @PostMapping
     @PreAuthorize("hasAuthority('product:save')")
     public void saveProduct(@RequestBody Product product) {
         service.saveNewProduct(product);
     }
+*/
 
     @GetMapping(path = "find")
     @PreAuthorize("hasAuthority('product:find')")
@@ -30,9 +32,11 @@ public class ProductController {
         return service.findAllProducts();
     }
 
+/*
     @DeleteMapping
     @PreAuthorize("hasAuthority('product:delete')")
     public void deleteProduct(@RequestParam String name) {
         service.deleteProductByName(name);
     }
+*/
 }

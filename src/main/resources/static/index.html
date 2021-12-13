@@ -2,9 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Hell-word</title>
+    <title>API-doc</title>
 </head>
 <body>
-<h1>hello!</h1>
+<h2>Employee -> Registration, Ordering</h2>
+<h2></h2>
+<h3>.../api/v1/supply/employee</h3>
+<p> * PostMapping: requestBody(str firstName, str lastName, enum(0-3) role, str phoneNumber)</p>
+<p>     Accesses: permitAll</p>
+<p> * GetMapping: path = "find", requestParam(str phoneNumber)</p>
+<p>     Accesses: permitAll</p>
+<p> * GetMapping: path = "findall"</p>
+<p>     Accesses: permitAll</p>
+<p> * DeleteMapping: requestParam(str phoneNumber)</p>
+<p>     Accesses: MANAGER, ADMINISTRATOR, MANAGER, </p><br>
+
+<h2>Department -> Ordering</h2>
+<h3>...api/v1/supply/department</h3>
+<p> * PostMapping: requestBody(str address)</p>
+<p>     Accesses: MANAGER, ADMINISTRATOR</p>
+<p> * GetMapping: path = "find", requestParam(str address)</p>
+<p>     Accesses: WAREHOUSE_WORKER, PRODUCT_SUPPLIER, MANAGER, ADMINISTRATOR</p>
+<p> * GetMapping: path = "findall"</p>
+<p>     Accesses: WAREHOUSE_WORKER, PRODUCT_SUPPLIER, MANAGER, ADMINISTRATOR</p>
+<p> * DeleteMapping: requestParam(str address)</p>
+<p>     Accesses: MANAGER, ADMINISTRATOR</p><br>
+
+<h2>Product -> Ordering</h2>
+<h3>...api/v1/supply/product</h3>
+<!--<p> * PostMapping: requestBody(str name, int quantity)</p>-->
+<p> * GetMapping: path = "find", requestParam(str name)</p>
+<p>     Accesses: WAREHOUSE_WORKER, PRODUCT_SUPPLIER, ADMINISTRATOR</p>
+<p> * GetMapping: path = "findall"</p>
+<p>     Accesses: WAREHOUSE_WORKER, PRODUCT_SUPPLIER, ADMINISTRATOR</p><br>
+<!--<p> * DeleteMapping: requestParam</p>-->
+
+<h2>Ordering <- Employee, Department, Product</h2>
+<h3>...api/v1/warehouse/ordering</h3>
+<p> * PostMapping: requestBody(str uuid, list(product) products, long employeeId, long departmentId, date dateTime)</p>
+<p>     Accesses: WAREHOUSE_WORKER, ADMINISTRATOR</p>
+<p> * GetMapping: path = "find", requestParam(str uuid)</p>
+<p>     Accesses: WAREHOUSE_WORKER, PRODUCT_SUPPLIER, ADMINISTRATOR</p>
+<p> * GetMapping: path = "findall"</p>
+<p>     Accesses: WAREHOUSE_WORKER, PRODUCT_SUPPLIER, ADMINISTRATOR</p>
+<p> * DeleteMapping: requestParam(str uuid)</p>
+<p>     Accesses: WAREHOUSE_WORKER, ADMINISTRATOR</p><br>
+
+<h2>Registration <- Employee</h2>
+<h3>...api/v1/registration</h3>
+<p> * PostMapping: requestBody(long employeeId, str password)</p>
+<p>     Accesses: permitAll</p>
+<!--<p> * GetMapping: path = "find", requestParam</p>
+<p> * GetMapping: path = "findall"</p>
+<p> * DeleteMapping: requestParam</p>--><br>
+
+<br><br><p>ApplicationUserRole: WAREHOUSE_WORKER(0), PRODUCT_SUPPLIER(1), MANAGER(2), ADMINISTRATOR(3)</p>
 </body>
 </html>

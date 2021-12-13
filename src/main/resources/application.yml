@@ -11,11 +11,11 @@ logging:
 
 spring:
   datasource:
-    url: postgres://lvtjlbwh:zzRV4A2Bj5aa18cMkOMJi4l_xrZooCw_@ella.db.elephantsql.com/lvtjlbwh
+    url: jdbc:postgresql://ella.db.elephantsql.com:5432/
     username: lvtjlbwh
     password: zzRV4A2Bj5aa18cMkOMJi4l_xrZooCw_
   jpa:
-     show-sql: true
+    show-sql: true
     hibernate:
       ddl-auto: update
     properties:
