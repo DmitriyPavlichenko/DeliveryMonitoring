@@ -18,14 +18,14 @@ public class EmployeeController {
         service.saveNewEmployee(employee);
     }
 
-//    @GetMapping(path = "find")
-    @PreAuthorize("hasAuthority('employee:find')")
+    @GetMapping(path = "find")
+//    @PreAuthorize("hasAuthority('employee:find')")
     public Employee findEmployee(@RequestParam String phoneNumber) {
         return service.findEmployee(phoneNumber);
     }
 
-//    @GetMapping(path = "findall")
-    @PreAuthorize("hasAuthority('employee:find')")
+    @GetMapping(path = "findall")
+//    @PreAuthorize("hasAuthority('employee:find')")
     public List<Employee> findAllOrders() {
         return service.findAllEmployees();
     }
