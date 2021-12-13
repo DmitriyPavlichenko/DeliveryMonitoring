@@ -1,0 +1,24 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+
+spring:
+  datasource:
+    url: postgres://lvtjlbwh:zzRV4A2Bj5aa18cMkOMJi4l_xrZooCw_@ella.db.elephantsql.com/lvtjlbwh
+    username: lvtjlbwh
+    password: zzRV4A2Bj5aa18cMkOMJi4l_xrZooCw_
+  jpa:
+     show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
