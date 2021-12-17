@@ -1,4 +1,4 @@
-package com.delmon.deliverymonitoring.security;
+package com.delmon.deliverymonitoring.security.user;
 
 import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -6,7 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.delmon.deliverymonitoring.security.ApplicationUserPermission.*;
+import static com.delmon.deliverymonitoring.security.user.ApplicationUserPermission.*;
 
 public enum ApplicationUserRole {
     WAREHOUSE_WORKER(Sets.newHashSet(DEPARTMENT_FIND,

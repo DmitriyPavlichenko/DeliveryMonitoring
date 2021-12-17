@@ -1,4 +1,4 @@
-package com.delmon.deliverymonitoring.security;
+package com.delmon.deliverymonitoring.security.user;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

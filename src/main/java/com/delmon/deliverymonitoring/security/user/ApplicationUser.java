@@ -1,9 +1,11 @@
 package com.delmon.deliverymonitoring.security.user;
 
 import com.delmon.deliverymonitoring.employee.Employee;
+import com.delmon.deliverymonitoring.security.IdGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,15 +20,8 @@ import java.util.Objects;
 @Entity
 public class ApplicationUser implements UserDetails, Serializable {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(generator = IdGenerator.generatorName)
+    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
     private Long id;
     @OneToOne(targetEntity = Employee.class)
     @JoinColumn(referencedColumnName = "id", nullable = false)

@@ -1,6 +1,11 @@
 package com.delmon.deliverymonitoring.product;
 
-import lombok.*;
+import com.delmon.deliverymonitoring.security.IdGenerator;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -8,38 +13,22 @@ import java.util.Objects;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 public class Product implements Serializable {
     @Id
-    @SequenceGenerator(
-            name = "product_sequence",
-            sequenceName = "product_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "product_sequence"
-    )
+    @GeneratedValue(generator = IdGenerator.generatorName)
+    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
     @Column(nullable = false, updatable = false)
     private long id;
     @Column(nullable = false, unique = true)
     private String name;
-    private int quantity;
+    private float price;
 
-    public Product(String name, int quantity) {
+    public Product(String name, float price) {
         this.name = name;
-        this.quantity = quantity;
-    }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", quantity=" + quantity +
-                '}';
+        this.price = price;
     }
 
     @Override
@@ -47,11 +36,11 @@ public class Product implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return id == product.id && quantity == product.quantity && Objects.equals(name, product.name);
+        return id == product.id && Float.compare(product.price, price) == 0 && Objects.equals(name, product.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, quantity);
+        return Objects.hash(id, name, price);
     }
 }

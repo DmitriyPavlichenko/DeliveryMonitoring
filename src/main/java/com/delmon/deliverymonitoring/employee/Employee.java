@@ -1,10 +1,12 @@
 package com.delmon.deliverymonitoring.employee;
 
-import com.delmon.deliverymonitoring.security.ApplicationUserRole;
+import com.delmon.deliverymonitoring.security.user.ApplicationUserRole;
+import com.delmon.deliverymonitoring.security.IdGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -17,15 +19,8 @@ import java.util.Objects;
 @Entity
 public class Employee implements Serializable {
     @Id
-    @SequenceGenerator(
-            name = "employee_sequence",
-            sequenceName = "employee_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "employee_sequence"
-    )
+    @GeneratedValue(generator = IdGenerator.generatorName)
+    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
     @Column(nullable = false, updatable = false)
     private long id;
     private String firstName;

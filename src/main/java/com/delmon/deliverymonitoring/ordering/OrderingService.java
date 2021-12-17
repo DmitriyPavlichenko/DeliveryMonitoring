@@ -25,7 +25,7 @@ public class OrderingService {
 
         Ordering newOrdering = new Ordering(
                 orderingRequest.getUuid(),
-                orderingRequest.getProducts(),
+                orderingRequest.getProductUnitList(),
                 employeeRepository.getById(orderingRequest.getEmployeeId()),
                 departmentRepository.getById(orderingRequest.getDepartmentId()),
                 orderingRequest.getDateTime());

@@ -1,5 +1,6 @@
 package com.delmon.deliverymonitoring.security;
 
+import com.delmon.deliverymonitoring.security.user.ApplicationUserPermission;
 import com.delmon.deliverymonitoring.security.user.ApplicationUserService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

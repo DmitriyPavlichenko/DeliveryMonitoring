@@ -3,10 +3,13 @@ package com.delmon.deliverymonitoring.ordering;
 import com.delmon.deliverymonitoring.department.Department;
 import com.delmon.deliverymonitoring.employee.Employee;
 import com.delmon.deliverymonitoring.product.Product;
+import com.delmon.deliverymonitoring.product.ProductUnit;
+import com.delmon.deliverymonitoring.security.IdGenerator;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -18,17 +21,9 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Ordering implements Serializable {
-    @Setter(AccessLevel.NONE)
     @Id
-    @SequenceGenerator(
-            name = "ordering_sequence",
-            sequenceName = "ordering_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "ordering_sequence"
-    )
+    @GeneratedValue(generator = IdGenerator.generatorName)
+    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
     @Column(nullable = false, updatable = false)
     private long id;
     @Column(nullable = false)
@@ -36,7 +31,7 @@ public class Ordering implements Serializable {
 
     @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
     @JoinColumn(referencedColumnName = "id")
-    private List<Product> products;
+    private List<ProductUnit> productUnitList;
     @OneToOne(targetEntity = Employee.class)
     @JoinColumn(referencedColumnName = "id", nullable = false)
     private Employee employee;
@@ -47,9 +42,9 @@ public class Ordering implements Serializable {
     @Column(nullable = false)
     private LocalDateTime date;
 
-    public Ordering(String uuid, List<Product> products, Employee employee, Department department, LocalDateTime date) {
+    public Ordering(String uuid, List<ProductUnit> productUnitList, Employee employee, Department department, LocalDateTime date) {
         this.uuid = uuid;
-        this.products = products;
+        this.productUnitList = productUnitList;
         this.employee = employee;
         this.department = department;
         this.date = date;
