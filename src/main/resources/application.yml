@@ -11,7 +11,9 @@ logging:
 
 spring:
   datasource:
-     url: jdbc:postgresql://ec2-54-217-232-239.eu-west-1.compute.amazonaws.com:5432/de360p7ca4kjn9
+    url: jdbc:postgresql://ec2-54-76-249-45.eu-west-1.compute.amazonaws.com:5432/d11emiks2ufkvo
+    username: username
+    password: password
   jpa:
     show-sql: true
     hibernate:
