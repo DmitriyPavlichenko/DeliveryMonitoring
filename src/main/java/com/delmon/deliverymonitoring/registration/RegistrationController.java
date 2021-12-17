@@ -1,10 +1,8 @@
 package com.delmon.deliverymonitoring.registration;
 
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 @AllArgsConstructor
 @RestController
@@ -13,8 +11,13 @@ public class RegistrationController {
     private final RegistrationService service;
 
     @PostMapping
-    //@PreAuthorize("hasAuthority('registration:register')")
+    @PreAuthorize("hasAuthority('registration:register')")
     public void register(@RequestBody RegistrationRequest request) {
         service.register(request);
+    }
+
+    @DeleteMapping
+    public void delete(@RequestParam String phoneNumber) {
+        service.delete(phoneNumber);
     }
 }

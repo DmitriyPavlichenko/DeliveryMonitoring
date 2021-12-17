@@ -2,12 +2,10 @@ package com.delmon.deliverymonitoring.ordering;
 
 import com.delmon.deliverymonitoring.department.DepartmentRepository;
 import com.delmon.deliverymonitoring.employee.EmployeeRepository;
-import com.delmon.deliverymonitoring.product.ProductRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service

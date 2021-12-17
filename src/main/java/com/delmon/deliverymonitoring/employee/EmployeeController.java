@@ -8,24 +8,24 @@ import java.util.List;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("api/v1/supply/employee")
+    @RequestMapping("api/v1/supply/employee")
 public class EmployeeController {
     private EmployeeService service;
 
     @PostMapping
-//    @PreAuthorize("hasAuthority('employee:save')")
+    @PreAuthorize("hasAuthority('employee:save')")
     public void saveEmployee(@RequestBody Employee employee) {
         service.saveNewEmployee(employee);
     }
 
     @GetMapping(path = "find")
-//    @PreAuthorize("hasAuthority('employee:find')")
+    @PreAuthorize("hasAuthority('employee:find')")
     public Employee findEmployee(@RequestParam String phoneNumber) {
         return service.findEmployee(phoneNumber);
     }
 
     @GetMapping(path = "findall")
-//    @PreAuthorize("hasAuthority('employee:find')")
+    @PreAuthorize("hasAuthority('employee:find')")
     public List<Employee> findAllOrders() {
         return service.findAllEmployees();
     }

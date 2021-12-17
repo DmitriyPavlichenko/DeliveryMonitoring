@@ -11,10 +11,11 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     public void saveNewEmployee(Employee employee) {
+        // TODO: phone number validation
         if (employeeRepository.existsByPhoneNumber(employee.getPhoneNumber())) {
             throw new IllegalStateException(employee.getPhoneNumber() + " is already registered");
         }
-        // TODO: phone number validation
+
         employeeRepository.save(employee);
     }
 

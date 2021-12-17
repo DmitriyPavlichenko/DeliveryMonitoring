@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<ApplicationUser, Long> {
+public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long> {
     Optional<ApplicationUser> findAppUserByEmployee_PhoneNumber(String phoneNumber);
     boolean existsByEmployee_PhoneNumber(String phoneNumber);
 
@@ -19,4 +19,6 @@ public interface UserRepository extends JpaRepository<ApplicationUser, Long> {
             "SET u.enabled = ?2 " +
             "WHERE u.employee.phoneNumber = ?1")
     int updateEnabledByPhoneNumber(String email, boolean enabled);
+
+    void deleteByEmployee_PhoneNumber(String phoneNumber);
 }

@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class UserService implements UserDetailsService {
-    private UserRepository repository;
+public class ApplicationUserService implements UserDetailsService {
+    private ApplicationUserRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
@@ -25,5 +25,14 @@ public class UserService implements UserDetailsService {
         }
 
         repository.save(user);
+    }
+
+    public void deleteUserByPhoneNumber(String phoneNumber) {
+        //  TODO: phone validation
+        if (!repository.existsByEmployee_PhoneNumber(phoneNumber)) {
+            throw new IllegalStateException("Invalid credentials");
+        }
+
+        repository.deleteByEmployee_PhoneNumber(phoneNumber);
     }
 }

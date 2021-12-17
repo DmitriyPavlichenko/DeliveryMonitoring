@@ -10,6 +10,8 @@ logging:
         security: DEBUG
 
 spring:
+#  cache:
+#    type: none
   datasource:
     url: jdbc:postgresql://ella.db.elephantsql.com:5432/lvtjlbwh
     username: lvtjlbwh
