@@ -4,8 +4,6 @@ import com.delmon.deliverymonitoring.department.Department;
 import com.delmon.deliverymonitoring.employee.Employee;
 import com.delmon.deliverymonitoring.product.Product;
 import com.delmon.deliverymonitoring.product.ProductUnit;
-import com.delmon.deliverymonitoring.security.IdGenerator;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,29 +19,25 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 public class Ordering implements Serializable {
-    @Id
-    @GeneratedValue(generator = IdGenerator.generatorName)
-    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
-    @Column(nullable = false, updatable = false)
-    private long id;
-    @Column(nullable = false)
-    private String uuid;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
+    @Id private String uuid;
 
     @OneToMany(targetEntity = Product.class, cascade = CascadeType.ALL)
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(referencedColumnName = "uuid")
     private List<ProductUnit> productUnitList;
     @OneToOne(targetEntity = Employee.class)
-    @JoinColumn(referencedColumnName = "id", nullable = false)
+    @JoinColumn(referencedColumnName = "uuid", nullable = false)
     private Employee employee;
     @OneToOne(targetEntity = Department.class)
-    @JoinColumn(referencedColumnName = "id", nullable = false)
+    @JoinColumn(referencedColumnName = "uuid", nullable = false)
     private Department department;
 
     @Column(nullable = false)
     private LocalDateTime date;
 
-    public Ordering(String uuid, List<ProductUnit> productUnitList, Employee employee, Department department, LocalDateTime date) {
-        this.uuid = uuid;
+    public Ordering(List<ProductUnit> productUnitList, Employee employee, Department department, LocalDateTime date) {
         this.productUnitList = productUnitList;
         this.employee = employee;
         this.department = department;

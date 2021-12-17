@@ -1,7 +1,6 @@
 package com.delmon.deliverymonitoring.employee;
 
 import com.delmon.deliverymonitoring.security.user.ApplicationUserRole;
-import com.delmon.deliverymonitoring.security.IdGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,10 +18,10 @@ import java.util.Objects;
 @Entity
 public class Employee implements Serializable {
     @Id
-    @GeneratedValue(generator = IdGenerator.generatorName)
-    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
-    @Column(nullable = false, updatable = false)
-    private long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
+    private String uuid;
     private String firstName;
     private String lastName;
     @Enumerated
@@ -42,11 +41,11 @@ public class Employee implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return id == employee.id && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && role == employee.role && Objects.equals(phoneNumber, employee.phoneNumber);
+        return uuid == employee.uuid && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && role == employee.role && Objects.equals(phoneNumber, employee.phoneNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, role, phoneNumber);
+        return Objects.hash(uuid, firstName, lastName, role, phoneNumber);
     }
 }

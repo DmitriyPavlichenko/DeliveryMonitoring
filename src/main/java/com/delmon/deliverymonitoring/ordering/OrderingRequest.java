@@ -17,7 +17,7 @@ public class OrderingRequest {
     private final String uuid;
     private final List<ProductUnit> productUnitList;
 
-    private final Long employeeId;
-    private final Long departmentId;
+    private final String employeeUuid;
+    private final String departmentUuid;
     private final LocalDateTime dateTime;
 }

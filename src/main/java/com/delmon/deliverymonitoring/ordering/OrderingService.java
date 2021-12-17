@@ -24,10 +24,9 @@ public class OrderingService {
         }
 
         Ordering newOrdering = new Ordering(
-                orderingRequest.getUuid(),
                 orderingRequest.getProductUnitList(),
-                employeeRepository.getById(orderingRequest.getEmployeeId()),
-                departmentRepository.getById(orderingRequest.getDepartmentId()),
+                employeeRepository.getByUuid(orderingRequest.getEmployeeUuid()),
+                departmentRepository.getById(orderingRequest.getDepartmentUuid()),
                 orderingRequest.getDateTime());
 
         repository.save(newOrdering);

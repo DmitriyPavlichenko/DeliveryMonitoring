@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface OrderingRepository extends JpaRepository<Ordering, Long> {
+public interface OrderingRepository extends JpaRepository<Ordering, String> {
     boolean existsByUuid(String uuid);
 
     Optional<Ordering> findByUuid(String uuid);

@@ -1,6 +1,5 @@
 package com.delmon.deliverymonitoring.department;
 
-import com.delmon.deliverymonitoring.security.IdGenerator;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,10 +14,10 @@ import java.util.Objects;
 @Entity
 public class Department implements Serializable {
     @Id
-    @GeneratedValue(generator = IdGenerator.generatorName)
-    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
-    @Column(nullable = false, updatable = false)
-    private long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
+    private String uuid;
     @Column(nullable = false, unique = true)
     private String address;
 
@@ -31,11 +30,11 @@ public class Department implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return id == that.id && Objects.equals(address, that.address);
+        return uuid == that.uuid && Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, address);
+        return Objects.hash(uuid, address);
     }
 }

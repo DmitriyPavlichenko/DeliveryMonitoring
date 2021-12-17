@@ -1,7 +1,6 @@
 package com.delmon.deliverymonitoring.security.user;
 
 import com.delmon.deliverymonitoring.employee.Employee;
-import com.delmon.deliverymonitoring.security.IdGenerator;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,15 +19,16 @@ import java.util.Objects;
 @Entity
 public class ApplicationUser implements UserDetails, Serializable {
     @Id
-    @GeneratedValue(generator = IdGenerator.generatorName)
-    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
+    private String uuid;
     @OneToOne(targetEntity = Employee.class)
-    @JoinColumn(referencedColumnName = "id", nullable = false)
+    @JoinColumn(referencedColumnName = "uuid", nullable = false)
     private Employee employee;
     private String password;
-    private boolean locked = false;
-    private boolean enabled = true;
+    private Boolean locked = false;
+    private Boolean enabled = true;
 
     public ApplicationUser(Employee employee, String password) {
         this.employee = employee;
@@ -76,18 +76,18 @@ public class ApplicationUser implements UserDetails, Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ApplicationUser user = (ApplicationUser) o;
-        return locked == user.locked && enabled == user.enabled && Objects.equals(id, user.id) && Objects.equals(employee, user.employee)  && Objects.equals(password, user.password);
+        return locked == user.locked && enabled == user.enabled && Objects.equals(uuid, user.uuid) && Objects.equals(employee, user.employee)  && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, employee, password, locked, enabled);
+        return Objects.hash(uuid, employee, password, locked, enabled);
     }
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "id=" + uuid +
                 ", employee=" + employee +
                 ", password='" + password + '\'' +
                 ", locked=" + locked +

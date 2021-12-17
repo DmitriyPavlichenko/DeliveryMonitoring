@@ -1,7 +1,5 @@
 package com.delmon.deliverymonitoring.product;
 
-import com.delmon.deliverymonitoring.security.IdGenerator;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,12 +14,11 @@ import java.util.Objects;
 @NoArgsConstructor
 @Entity
 public class ProductUnit implements Serializable {
-    @Setter(AccessLevel.NONE)
     @Id
-    @GeneratedValue(generator = IdGenerator.generatorName)
-    @GenericGenerator(name = IdGenerator.generatorName, strategy = "idGenerator")
-    @Column(nullable = false, updatable = false)
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
+    @Column(columnDefinition = "CHAR(32)")
+    private String uuid;
     @OneToOne
     @JoinColumn(unique = true, nullable = false)
     private Product product;
@@ -33,11 +30,11 @@ public class ProductUnit implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductUnit that = (ProductUnit) o;
-        return Objects.equals(id, that.id) && Objects.equals(product, that.product) && Objects.equals(quantity, that.quantity);
+        return Objects.equals(uuid, that.uuid) && Objects.equals(product, that.product) && Objects.equals(quantity, that.quantity);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, product, quantity);
+        return Objects.hash(uuid, product, quantity);
     }
 }

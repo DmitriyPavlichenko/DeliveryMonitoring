@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, Long> {
+public interface ApplicationUserRepository extends JpaRepository<ApplicationUser, String> {
     Optional<ApplicationUser> findAppUserByEmployee_PhoneNumber(String phoneNumber);
     boolean existsByEmployee_PhoneNumber(String phoneNumber);
 

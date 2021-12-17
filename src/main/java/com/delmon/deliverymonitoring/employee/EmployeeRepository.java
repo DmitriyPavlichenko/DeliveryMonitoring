@@ -6,8 +6,12 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, String> {
     Optional<Employee> findEmployeeByPhoneNumber(String phoneNumber);
     boolean existsByPhoneNumber(String phoneNumber);
     void deleteByPhoneNumber(String phoneNumber);
+
+    Employee getByUuid(String employeeUuid);
+
+    Optional<Employee> findByUuid(String employeeUuid);
 }
