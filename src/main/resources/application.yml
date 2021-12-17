@@ -10,13 +10,8 @@ logging:
         security: DEBUG
 
 spring:
-#  cache:
-#    type: none
   datasource:
-
-    url: jdbc:postgresql://ella.db.elephantsql.com:5432/lvtjlbwh
-    username: lvtjlbwh
-    password: zzRV4A2Bj5aa18cMkOMJi4l_xrZooCw_
+     url: jdbc:postgresql://ec2-54-217-232-239.eu-west-1.compute.amazonaws.com:5432/de360p7ca4kjn9
   jpa:
     show-sql: true
     hibernate:
