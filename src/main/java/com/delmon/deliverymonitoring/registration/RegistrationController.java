@@ -17,6 +17,7 @@ public class RegistrationController {
     }
 
     @DeleteMapping
+    @PreAuthorize("hasAuthority('registration:delete')")
     public void delete(@RequestParam String phoneNumber) {
         service.delete(phoneNumber);
     }
