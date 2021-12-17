@@ -17,7 +17,7 @@ spring:
     username: lvtjlbwh
     password: zzRV4A2Bj5aa18cMkOMJi4l_xrZooCw_
   jpa:
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
     properties:
