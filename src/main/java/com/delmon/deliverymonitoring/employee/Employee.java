@@ -4,7 +4,6 @@ import com.delmon.deliverymonitoring.security.user.ApplicationUserRole;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -14,7 +13,6 @@ import java.util.Objects;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 @Entity
 public class Employee implements Serializable {
     @Id
@@ -25,6 +23,7 @@ public class Employee implements Serializable {
     private String firstName;
     private String lastName;
     @Enumerated
+    @Column(nullable = false)
     private ApplicationUserRole role;
     @Column(nullable = false, unique = true)
     private String phoneNumber;
@@ -41,11 +40,22 @@ public class Employee implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return uuid == employee.uuid && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && role == employee.role && Objects.equals(phoneNumber, employee.phoneNumber);
+        return Objects.equals(uuid, employee.uuid) && Objects.equals(firstName, employee.firstName) && Objects.equals(lastName, employee.lastName) && role == employee.role && Objects.equals(phoneNumber, employee.phoneNumber);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(uuid, firstName, lastName, role, phoneNumber);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "uuid='" + uuid + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", role=" + role +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
     }
 }

@@ -3,7 +3,6 @@ package com.delmon.deliverymonitoring.product;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -13,7 +12,6 @@ import java.util.Objects;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 @Entity
 public class Product implements Serializable {
     @Id
@@ -23,6 +21,7 @@ public class Product implements Serializable {
     private String uuid;
     @Column(nullable = false, unique = true)
     private String name;
+    @Column(nullable = false)
     private Float price;
 
     public Product(String name, float price) {
@@ -35,11 +34,21 @@ public class Product implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Product product = (Product) o;
-        return uuid == product.uuid && Float.compare(product.price, price) == 0 && Objects.equals(name, product.name);
+        return Objects.equals(uuid, product.uuid) && Objects.equals(name, product.name) && Objects.equals(price,
+                product.price);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(uuid, name, price);
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "uuid='" + uuid + '\'' +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

@@ -10,7 +10,6 @@ import java.util.Objects;
 @Setter
 @Getter
 @NoArgsConstructor
-@ToString
 @Entity
 public class Department implements Serializable {
     @Id
@@ -30,11 +29,19 @@ public class Department implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department that = (Department) o;
-        return uuid == that.uuid && Objects.equals(address, that.address);
+        return Objects.equals(uuid, that.uuid) && Objects.equals(address, that.address);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(uuid, address);
+    }
+
+    @Override
+    public String toString() {
+        return "Department{" +
+                "uuid='" + uuid + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

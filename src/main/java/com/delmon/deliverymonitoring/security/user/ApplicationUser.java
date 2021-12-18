@@ -23,9 +23,10 @@ public class ApplicationUser implements UserDetails, Serializable {
     @GenericGenerator(name = "uuid", strategy = "uuid")
     @Column(columnDefinition = "CHAR(32)")
     private String uuid;
-    @OneToOne(targetEntity = Employee.class)
-    @JoinColumn(referencedColumnName = "uuid", nullable = false)
+    @OneToOne
+    @JoinColumn(nullable = false)
     private Employee employee;
+    @JoinColumn(nullable = false)
     private String password;
     private Boolean locked = false;
     private Boolean enabled = true;

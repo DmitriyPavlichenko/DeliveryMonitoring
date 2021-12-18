@@ -37,4 +37,13 @@ public class ProductUnit implements Serializable {
     public int hashCode() {
         return Objects.hash(uuid, product, quantity);
     }
+
+    @Override
+    public String toString() {
+        return "ProductUnit{" +
+                "uuid='" + uuid + '\'' +
+                ", product=" + product +
+                ", quantity=" + quantity +
+                '}';
+    }
 }
