@@ -5,6 +5,7 @@ import com.delmon.deliverymonitoring.employee.EmployeeRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @AllArgsConstructor
@@ -27,7 +28,7 @@ public class OrderingService {
                 orderingRequest.getProductUnitList(),
                 employeeRepository.getByUuid(orderingRequest.getEmployeeUuid()),
                 departmentRepository.getById(orderingRequest.getDepartmentUuid()),
-                orderingRequest.getDateTime());
+                LocalDateTime.now());
 
         repository.save(newOrdering);
     }

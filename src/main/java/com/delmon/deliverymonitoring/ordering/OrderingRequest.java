@@ -19,5 +19,4 @@ public class OrderingRequest {
 
     private final String employeeUuid;
     private final String departmentUuid;
-    private final LocalDateTime dateTime;
 }
