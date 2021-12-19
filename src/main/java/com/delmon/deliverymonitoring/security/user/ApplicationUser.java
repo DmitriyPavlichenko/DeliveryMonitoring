@@ -31,14 +31,19 @@ public class ApplicationUser implements UserDetails, Serializable {
     private Boolean locked = false;
     private Boolean enabled = true;
 
+    @Transient
+    private ApplicationUserRole userRole;
+
     public ApplicationUser(Employee employee, String password) {
         this.employee = employee;
         this.password = password;
+
+        userRole = ApplicationUserRole.toApplicationUserRole(employee.getRole());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return employee.getRole().getGrantedAuthorities();
+        return userRole.getGrantedAuthorities();
     }
 
     @Override

@@ -52,7 +52,8 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
                 .withUser("admin")
-                .password(password)
+                // TODO: change to dynamic
+                .password("password")
                 .authorities(ApplicationUserPermission.getAllPermissions());
     }
 

@@ -25,7 +25,7 @@ class EmployeeServiceTest {
     @Test
     void singUpEmployee() {
         // given
-        Employee givenEmployee = new Employee("firstName", "lastName", ApplicationUserRole.WAREHOUSE_WORKER,
+        Employee givenEmployee = new Employee("firstName", "lastName", EmployeeRole.WAREHOUSE_WORKER,
                 "number");
         given(mockedRepository.existsByPhoneNumber(any())).willReturn(false);
 

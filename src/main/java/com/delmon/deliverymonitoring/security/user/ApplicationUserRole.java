@@ -3,6 +3,7 @@ package com.delmon.deliverymonitoring.security.user;
 import com.google.common.collect.Sets;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -42,5 +43,13 @@ public enum ApplicationUserRole {
         permissions.add(new SimpleGrantedAuthority("ROLE_" + this.name()));
 
         return permissions;
+    }
+
+    // Convert any other role to ApplicationUserRole by role name
+    public static  <T extends Enum<T>> ApplicationUserRole toApplicationUserRole(T role) {
+        return Arrays.stream(ApplicationUserRole.values())
+                .filter(applicationUserRole -> applicationUserRole.name().equals(role.name()))
+                .findAny()
+                .orElseThrow(() -> new IllegalStateException("Undefined role"));
     }
 }
