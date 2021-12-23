@@ -9,7 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class AuthenticationResponse {
-    private String phoneNumber;
+    private String username;
     private String firstName;
     private String lastName;
     private EmployeeRole employeeRole;
