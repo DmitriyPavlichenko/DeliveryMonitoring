@@ -15,8 +15,10 @@ public class AuthenticationService {
         ApplicationUser user =
                 userService.findUserByPhoneNumber(SecurityContextHolder.getContext().getAuthentication().getName());
         return new AuthenticationResponse(
-                user.getUuid(),
-                user.getEmployee(),
+                user.getEmployee().getPhoneNumber(),
+                user.getEmployee().getFirstName(),
+                user.getEmployee().getLastName(),
+                user.getEmployee().getRole(),
                 user.getLocked(),
                 user.getEnabled()
         );
