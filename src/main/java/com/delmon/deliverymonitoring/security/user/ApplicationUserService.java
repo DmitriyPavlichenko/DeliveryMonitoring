@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 public class ApplicationUserService implements UserDetailsService {
     private ApplicationUserRepository repository;
 
+    public ApplicationUser findUserByPhoneNumber(String phoneNumber) {
+        return repository.findAppUserByEmployee_PhoneNumber(phoneNumber)
+                .orElseThrow(() -> new UsernameNotFoundException("User with " + phoneNumber + " phone number isn't exists"));
+    }
+
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return repository.findAppUserByEmployee_PhoneNumber(s)

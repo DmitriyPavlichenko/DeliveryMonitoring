@@ -24,7 +24,7 @@ public class Ordering implements Serializable {
     @Column(columnDefinition = "CHAR(32)")
     @Id private String uuid;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<ProductUnit> productUnitList;
     @OneToOne
     @JoinColumn(nullable = false)
