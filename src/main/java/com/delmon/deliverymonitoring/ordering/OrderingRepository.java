@@ -12,6 +12,7 @@ public interface OrderingRepository extends JpaRepository<Ordering, String> {
 
     Optional<Ordering> findByUuid(String uuid);
 
+    @Transactional
     void deleteByUuid(String uuid);
 
     //TODO optimize overriding

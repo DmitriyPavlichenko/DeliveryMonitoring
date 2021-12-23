@@ -20,5 +20,6 @@ public interface ApplicationUserRepository extends JpaRepository<ApplicationUser
             "WHERE u.employee.phoneNumber = ?1")
     int updateEnabledByPhoneNumber(String email, boolean enabled);
 
+    @Transactional
     void deleteByEmployee_PhoneNumber(String phoneNumber);
 }
