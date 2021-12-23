@@ -25,7 +25,9 @@ public class DeliveryMonitoringApplication {
         return new WebMvcConfigurerAdapter() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/**").allowedOrigins("*"); // for /** means all mapping URL, and * for all domain
+                registry.addMapping("/**").allowedOrigins("*").allowedMethods("GET", "POST","PUT", "DELETE");
+
+
             }
         };
     }
