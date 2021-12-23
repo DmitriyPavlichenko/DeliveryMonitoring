@@ -19,11 +19,6 @@ public class OrderingService {
     private final static String UUID_IS_NOT_EXISTING_MESSAGE = "Ordering with %s uuid isn't existing";
 
     public void saveNewOrdering(OrderingRequest orderingRequest) {
-        // Checking if ordering uuid is unique
-        if (repository.existsByUuid(orderingRequest.getUuid())) {
-            throw new IllegalArgumentException(String.format(UUID_IS_EXISTING_MESSAGE, orderingRequest.getUuid()));
-        }
-
         Ordering newOrdering = new Ordering(
                 orderingRequest.getProductUnitList(),
                 employeeRepository.getByUuid(orderingRequest.getEmployeeUuid()),

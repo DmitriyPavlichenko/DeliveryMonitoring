@@ -13,7 +13,6 @@ import java.util.List;
 @ToString
 @EqualsAndHashCode
 public class OrderingRequest {
-    private final String uuid;
     private final List<ProductUnit> productUnitList;
 
     private final String employeeUuid;
