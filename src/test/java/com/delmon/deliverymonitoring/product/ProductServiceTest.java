@@ -1,4 +1,3 @@
-/*
 package com.delmon.deliverymonitoring.product;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +24,7 @@ class ProductServiceTest {
     @Test
     void saveNewProduct() {
         // given
-        Product givenProduct = new Product("name");
+        Product givenProduct = new Product("name", 5f);
         given(mockedRepository.existsByName(anyString())).willReturn(false);
 
         // when
@@ -39,7 +38,7 @@ class ProductServiceTest {
     void findProductByName() {
         // given
         String name = "name";
-        Product givenProduct = new Product("name");
+        Product givenProduct = new Product("name", 5f);
         given(mockedRepository.findByName(anyString())).willReturn(java.util.Optional.of(givenProduct));
 
         // when
@@ -70,4 +69,4 @@ class ProductServiceTest {
         // then
         verify(mockedRepository).deleteByName(name);
     }
-}*/
+}
