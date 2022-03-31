@@ -6,6 +6,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -22,7 +24,7 @@ class DepartmentServiceTest {
     }
 
     @Test
-    void saveNewDepartment() {
+    void canSaveNewDepartment() {
         // given
         Department givenDepartment = new Department("address");
         given(mockedRepository.existsByAddress(anyString())).willReturn(false);
@@ -35,7 +37,22 @@ class DepartmentServiceTest {
     }
 
     @Test
-    void findDepartmentByAddress() {
+    void cannotSaveNewDepartment() {
+        // given
+        Department givenDepartment = new Department("address");
+        given(mockedRepository.existsByAddress(anyString())).willReturn(true);
+
+        // when
+        Throwable throwable = catchThrowable(() -> service.saveNewDepartment(givenDepartment));
+
+        // then
+        assertThat(throwable)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("address is already existing");
+    }
+
+    @Test
+    void canFindDepartmentByAddress() {
         // given
         String address = "address";
         Department givenDepartment = new Department("address");
@@ -49,7 +66,7 @@ class DepartmentServiceTest {
     }
 
     @Test
-    void findAllDepartments() {
+    void canFindAllDepartments() {
         // when
         service.findAllDepartments();
 
@@ -58,7 +75,7 @@ class DepartmentServiceTest {
     }
 
     @Test
-    void deleteDepartmentByAddress() {
+    void canDeleteDepartmentByAddress() {
         // given
         String address = "address";
         given(mockedRepository.existsByAddress(anyString())).willReturn(true);
@@ -68,5 +85,20 @@ class DepartmentServiceTest {
 
         // then
         verify(mockedRepository).deleteByAddress(address);
+    }
+
+    @Test
+    void cannotDeleteDepartmentByAddress() {
+        // given
+        String address = "address";
+        given(mockedRepository.existsByAddress(anyString())).willReturn(false);
+
+        // when
+        Throwable throwable = catchThrowable(() -> service.deleteDepartmentByAddress(address));
+
+        // then
+        assertThat(throwable)
+                .isInstanceOf(IllegalStateException.class)
+                .hasMessageContaining("address address isn't existing");
     }
 }

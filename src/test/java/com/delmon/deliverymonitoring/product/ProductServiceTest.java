@@ -6,6 +6,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Optional;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.AssertionsForClassTypes.catchThrowable;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -22,7 +27,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void saveNewProduct() {
+    void canSaveNewProduct() {
         // given
         Product givenProduct = new Product("name", 5f);
         given(mockedRepository.existsByName(anyString())).willReturn(false);
@@ -35,11 +40,25 @@ class ProductServiceTest {
     }
 
     @Test
-    void findProductByName() {
+    void cannotSaveNewProduct() {
+        // given
+        Product givenProduct = new Product("name", 5f);
+        given(mockedRepository.existsByName(anyString())).willReturn(true);
+
+        // when
+        Throwable throwable = catchThrowable(() -> service.saveNewProduct(givenProduct));
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("name is already " +
+                "existing");
+    }
+
+    @Test
+    void canFindProductByName() {
         // given
         String name = "name";
         Product givenProduct = new Product("name", 5f);
-        given(mockedRepository.findByName(anyString())).willReturn(java.util.Optional.of(givenProduct));
+        given(mockedRepository.findByName(anyString())).willReturn(Optional.of(givenProduct));
 
         // when
         service.findProductByName(name);
@@ -49,7 +68,17 @@ class ProductServiceTest {
     }
 
     @Test
-    void findAllProducts() {
+    void cannotFindProductByName() {
+        // when
+        Throwable throwable = catchThrowable(() -> service.findProductByName(anyString()));
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("name address isn't " +
+                "existing");
+    }
+
+    @Test
+    void canFindAllProducts() {
         // when
         service.findAllProducts();
 
@@ -58,7 +87,7 @@ class ProductServiceTest {
     }
 
     @Test
-    void deleteProductByName() {
+    void canDeleteProductByName() {
         // given
         String name = "name";
         given(mockedRepository.existsByName(anyString())).willReturn(true);
@@ -68,5 +97,18 @@ class ProductServiceTest {
 
         // then
         verify(mockedRepository).deleteByName(name);
+    }
+
+    @Test
+    void cannotDeleteProductByName() {
+        // given
+        given(mockedRepository.existsByName(anyString())).willReturn(false);
+
+        // when
+        Throwable throwable = catchThrowable(() -> service.deleteProductByName(anyString()));
+
+        // then
+        assertThat(throwable).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("name address isn't " +
+                "existing");
     }
 }

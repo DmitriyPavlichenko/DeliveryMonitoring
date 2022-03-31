@@ -25,20 +25,16 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void existsByInvalidName() {
-        // given
-        String name = "name";
-        repository.save(new Product("notName", 5f));
-
+    void notExistsByName() {
         // when
-        boolean exists = repository.existsByName(name);
+        boolean exists = repository.existsByName("name");
 
         // then
         assertThat(exists).isFalse();
     }
 
     @Test
-    void findByName() {
+    void canFindByName() {
         // given
         String name = "name";
         Product givenProduct = new Product(name, 5f);
@@ -53,22 +49,17 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void findByInvalidName() {
-        // given
-        String name = "name";
-        Product givenProduct = new Product("invalidName", 5f);
-        repository.save(givenProduct);
-
+    void cannotFindByName() {
         // when
-        Product product = repository.findByName(name)
+        Product product = repository.findByName("name")
                 .orElse(null);
 
         // then
-        assertThat(product).isEqualTo(null);
+        assertThat(product).isNull();
     }
 
     @Test
-    void deleteByName() {
+    void canDeleteByName() {
         // given
         String name = "name";
         Product givenProduct = new Product("invalidName", 5f);
@@ -83,15 +74,15 @@ class ProductRepositoryTest {
     }
 
     @Test
-    void deleteByInvalidName() {
+    void cannotDeleteByName() {
         // given
         String name = "name";
-        Product givenProduct = new Product("invalidName", 5f);
-        repository.save(givenProduct);
 
         // when
-        try {
-            repository.deleteByName(name);
-        } catch (Exception ignored) {}
+        repository.deleteByName(name);
+        boolean exists = repository.existsByName(name);
+
+        //then
+        assertThat(exists).isFalse();
     }
 }

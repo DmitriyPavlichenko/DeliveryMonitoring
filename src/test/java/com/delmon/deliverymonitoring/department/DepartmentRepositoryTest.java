@@ -25,7 +25,7 @@ class DepartmentRepositoryTest {
     }
 
     @Test
-    void existsByInvalidAddress() {
+    void notExistsByAddress() {
         // given
         String address = "Address";
         repository.save(new Department("notAddress"));
@@ -38,7 +38,7 @@ class DepartmentRepositoryTest {
     }
 
     @Test
-    void findByAddress() {
+    void canFindByAddress() {
         // given
         String address = "address";
         Department givenDepartment = new Department(address);
@@ -53,7 +53,7 @@ class DepartmentRepositoryTest {
     }
 
     @Test
-    void findByInvalidAddress() {
+    void cannotFindByAddress() {
         // given
         String address = "address";
         Department givenDepartment = new Department("invalidAddress");
@@ -68,7 +68,7 @@ class DepartmentRepositoryTest {
     }
 
     @Test
-    void deleteByAddress() {
+    void canDeleteByAddress() {
         // given
         String address = "address";
         Department givenDepartment = new Department(address);
@@ -83,15 +83,15 @@ class DepartmentRepositoryTest {
     }
 
     @Test
-    void deleteByInvalidAddress() {
+    void cannotDeleteByAddress() {
         // given
         String address = "address";
-        Department givenDepartment = new Department("invalidAddress");
-        repository.save(givenDepartment);
 
         // when
-        try {
-            repository.deleteByAddress(address);
-        } catch (Exception ignored) {}
+        repository.deleteByAddress(address);
+        boolean exists = repository.existsByAddress(address);
+
+        // then
+        assertThat(exists).isFalse();
     }
 }
