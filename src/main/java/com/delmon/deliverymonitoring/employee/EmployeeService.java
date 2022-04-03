@@ -20,7 +20,7 @@ public class EmployeeService {
     }
 
     public Employee findEmployee(String phoneNumber) {
-        return employeeRepository.findEmployeeByPhoneNumber(phoneNumber)
+        return employeeRepository.findByPhoneNumber(phoneNumber)
                 .orElseThrow(() -> new IllegalStateException("Invalid phone number"));
     }
 

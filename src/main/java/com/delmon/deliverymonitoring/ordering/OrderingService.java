@@ -21,7 +21,8 @@ public class OrderingService {
     public void saveNewOrdering(OrderingRequest orderingRequest) {
         Ordering newOrdering = new Ordering(
                 orderingRequest.getProductUnitList(),
-                employeeRepository.getByUuid(orderingRequest.getEmployeeUuid()),
+                employeeRepository.findByUuid(orderingRequest.getEmployeeUuid())
+                        .orElseThrow(() -> new IllegalStateException("Not found")),
                 departmentRepository.getById(orderingRequest.getDepartmentUuid()),
                 LocalDateTime.now());
 

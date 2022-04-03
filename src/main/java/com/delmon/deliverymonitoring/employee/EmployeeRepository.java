@@ -8,12 +8,12 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, String> {
-    Optional<Employee> findEmployeeByPhoneNumber(String phoneNumber);
+    Optional<Employee> findByPhoneNumber(String phoneNumber);
+
     boolean existsByPhoneNumber(String phoneNumber);
+
     @Transactional
     void deleteByPhoneNumber(String phoneNumber);
-
-    Employee getByUuid(String employeeUuid);
 
     Optional<Employee> findByUuid(String employeeUuid);
 }
