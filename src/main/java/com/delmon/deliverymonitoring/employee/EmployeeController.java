@@ -26,13 +26,13 @@ public class EmployeeController {
 
     @GetMapping(path = "findall")
     @PreAuthorize("hasAuthority('employee:find')")
-    public List<Employee> findAllOrders() {
+    public List<Employee> findAllEmployees() {
         return service.findAllEmployees();
     }
 
     @DeleteMapping
     @PreAuthorize("hasAuthority('employee:delete')")
-    public void deleteOrdering(@RequestParam String phoneNumber) {
+    public void deleteEmployee(@RequestParam String phoneNumber) {
         service.deleteEmployeeByPhoneNumber(phoneNumber);
     }
 }
